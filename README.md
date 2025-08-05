@@ -3,7 +3,7 @@
 A beautiful, responsive habit tracker application built with React that supports multiple users and helps you build better habits, one day at a time.
 
 ## 📱 Live Demo
-[View Live Demo](https://your-habit-forge-app.vercel.app) *(Deploy to get the actual link)*
+[View Live Demo](https://habit-forge-assignment-frontend.vercel.app/) *(Deploy to get the actual link)*
 
 ## ✨ Features
 
@@ -218,11 +218,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-- **Developer**: [Your Name]
-- **Email**: [your.email@example.com]  
-- **LinkedIn**: [Your LinkedIn Profile]
-- **GitHub**: [Your GitHub Profile]
-- **Phone**: [Your Contact Number]
+- **Developer**: Rishab Jha
+- **Email**: rishabjha134@gmail.com
+- **LinkedIn**: https://www.linkedin.com/in/rishab-jha/
+- **GitHub**: https://github.com/RishabJha134
 
 ---
 
