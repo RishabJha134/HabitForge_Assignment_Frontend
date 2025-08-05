@@ -10,21 +10,18 @@ const Dashboard = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
-  // Handle logout
   const handleLogout = () => {
     if (window.confirm('Are you sure you want to logout?')) {
       logout();
     }
   };
 
-  // Handle clear all habits
   const handleClearAllHabits = () => {
     if (window.confirm('Are you sure you want to delete all your habits? This action cannot be undone.')) {
       clearAllHabits();
     }
   };
 
-  // Toggle dark mode
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
@@ -39,11 +36,9 @@ const Dashboard = () => {
 
   return (
     <div className={containerClass}>
-      {/* Header */}
       <header className={`${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} border-b`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo and Welcome */}
             <div className="flex items-center space-x-4">
               <h1 className="text-2xl font-bold text-blue-600">
                 🎯 HabitForge
@@ -55,9 +50,7 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Actions */}
             <div className="flex items-center space-x-3">
-              {/* Dark Mode Toggle */}
               <button
                 onClick={toggleDarkMode}
                 className={`p-2 rounded-lg ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-100 hover:bg-gray-200'} transition-colors`}
@@ -66,7 +59,6 @@ const Dashboard = () => {
                 {darkMode ? '☀️' : '🌙'}
               </button>
 
-              {/* Clear Habits Button */}
               {habits.length > 0 && (
                 <button
                   onClick={handleClearAllHabits}
@@ -76,7 +68,6 @@ const Dashboard = () => {
                 </button>
               )}
 
-              {/* Logout Button */}
               <button
                 onClick={handleLogout}
                 className="px-4 py-2 text-sm bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
@@ -88,9 +79,7 @@ const Dashboard = () => {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Stats Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className={`${cardClass} rounded-lg border p-6`}>
             <h3 className="text-lg font-semibold mb-2">Total Habits</h3>
@@ -134,7 +123,6 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Add Habit Section */}
         <div className={`${cardClass} rounded-lg border p-6 mb-8`}>
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">Your Habits</h2>
@@ -147,7 +135,6 @@ const Dashboard = () => {
             </button>
           </div>
 
-          {/* Add Habit Form */}
           {showAddForm && (
             <AddHabitForm 
               onSuccess={() => setShowAddForm(false)}
@@ -156,7 +143,6 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* Habits List */}
         {habits.length === 0 ? (
           <div className={`${cardClass} rounded-lg border p-12 text-center`}>
             <div className="text-6xl mb-4">🎯</div>

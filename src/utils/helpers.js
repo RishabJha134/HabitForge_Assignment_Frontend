@@ -1,6 +1,3 @@
-// Storage utility functions for HabitForge
-
-// Keys for localStorage
 export const STORAGE_KEYS = {
   USERS: 'habitForgeUsers',
   CURRENT_USER: 'currentUser',
@@ -8,30 +5,25 @@ export const STORAGE_KEYS = {
   SETTINGS: 'habitForgeSettings'
 };
 
-// Validate mobile number (10 digits)
 export const validateMobile = (mobile) => {
   const mobileRegex = /^[0-9]{10}$/;
   return mobileRegex.test(mobile);
 };
 
-// Validate password (4 digits)
 export const validatePassword = (password) => {
   const passwordRegex = /^[0-9]{4}$/;
   return passwordRegex.test(password);
 };
 
-// Format mobile number for display
 export const formatMobile = (mobile) => {
   if (!mobile || mobile.length !== 10) return mobile;
   return `${mobile.slice(0, 3)}-${mobile.slice(3, 6)}-${mobile.slice(6)}`;
 };
 
-// Get current day of week in lowercase
 export const getCurrentDay = () => {
   return new Date().toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
 };
 
-// Get days of week array
 export const getDaysOfWeek = () => {
   return [
     { key: 'monday', label: 'Mon', full: 'Monday' },
@@ -44,13 +36,11 @@ export const getDaysOfWeek = () => {
   ];
 };
 
-// Calculate habit completion percentage
 export const calculateCompletionPercentage = (habit) => {
   const completedDays = Object.values(habit.completedDays).filter(Boolean).length;
   return Math.round((completedDays / 7) * 100);
 };
 
-// Calculate total streak (consecutive days from start of week)
 export const calculateStreak = (habit) => {
   const days = getDaysOfWeek();
   let streak = 0;
@@ -66,7 +56,6 @@ export const calculateStreak = (habit) => {
   return streak;
 };
 
-// Generate random habit suggestions
 export const getHabitSuggestions = () => {
   return [
     { name: 'Drink 8 glasses of water', category: 'Health', color: '#06B6D4' },
@@ -82,7 +71,6 @@ export const getHabitSuggestions = () => {
   ];
 };
 
-// Export/Import data functions
 export const exportUserData = (userId) => {
   try {
     const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS)) || [];
@@ -92,7 +80,7 @@ export const exportUserData = (userId) => {
     const userHabits = habits[userId] || [];
     
     const exportData = {
-      user: { ...user, password: undefined }, // Don't export password
+      user: { ...user, password: undefined },
       habits: userHabits,
       exportDate: new Date().toISOString(),
       version: '1.0.0'
@@ -105,7 +93,6 @@ export const exportUserData = (userId) => {
   }
 };
 
-// Safe localStorage operations
 export const safeLocalStorage = {
   get: (key, defaultValue = null) => {
     try {
@@ -148,7 +135,6 @@ export const safeLocalStorage = {
   }
 };
 
-// Color palette for habits
 export const habitColors = [
   { name: 'Blue', value: '#3B82F6', light: '#DBEAFE' },
   { name: 'Green', value: '#10B981', light: '#D1FAE5' },
@@ -162,7 +148,6 @@ export const habitColors = [
   { name: 'Emerald', value: '#059669', light: '#D1FAE5' }
 ];
 
-// Get a random color from the palette
 export const getRandomColor = () => {
   const randomIndex = Math.floor(Math.random() * habitColors.length);
   return habitColors[randomIndex].value;

@@ -4,7 +4,6 @@ import { useHabits } from '../context/HabitContext';
 const HabitCard = ({ habit, darkMode }) => {
   const { toggleHabitDay, deleteHabit, calculateStreak } = useHabits();
 
-  // Days of the week
   const days = [
     { key: 'monday', label: 'Mon' },
     { key: 'tuesday', label: 'Tue' },
@@ -15,21 +14,17 @@ const HabitCard = ({ habit, darkMode }) => {
     { key: 'sunday', label: 'Sun' }
   ];
 
-  // Calculate streak
   const streak = calculateStreak(habit);
 
-  // Ensure habit has required properties
   if (!habit || !habit.id) {
     return null;
   }
 
-  // Ensure completedDays exists
   const completedDays = habit.completedDays || {
     monday: false, tuesday: false, wednesday: false, thursday: false,
     friday: false, saturday: false, sunday: false
   };
 
-  // Handle day toggle
   const handleDayToggle = (day) => {
     try {
       if (!day || !habit.id) {
@@ -42,7 +37,6 @@ const HabitCard = ({ habit, darkMode }) => {
     }
   };
 
-  // Handle delete
   const handleDelete = () => {
     try {
       if (window.confirm(`Are you sure you want to delete "${habit.name || 'this habit'}"?`)) {
@@ -59,11 +53,9 @@ const HabitCard = ({ habit, darkMode }) => {
 
   return (
     <div className={`${cardClass} rounded-lg border p-6 hover:shadow-lg transition-shadow`}>
-      {/* Header */}
       <div className="flex justify-between items-start mb-4">
         <div className="flex-1">
           <div className="flex items-center space-x-3 mb-2">
-            {/* Color Badge */}
             <div 
               className="w-4 h-4 rounded-full"
               style={{ backgroundColor: habit.color || '#3B82F6' }}
@@ -89,7 +81,6 @@ const HabitCard = ({ habit, darkMode }) => {
           </div>
         </div>
 
-        {/* Delete Button */}
         <button
           onClick={handleDelete}
           className={`p-2 rounded-lg transition-colors ${
@@ -103,7 +94,6 @@ const HabitCard = ({ habit, darkMode }) => {
         </button>
       </div>
 
-      {/* Days Grid */}
       <div className="space-y-3">
         <h4 className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
           Weekly Progress
@@ -115,12 +105,10 @@ const HabitCard = ({ habit, darkMode }) => {
             
             return (
               <div key={day.key} className="text-center">
-                {/* Day Label */}
                 <div className={`text-xs mb-1 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                   {day.label}
                 </div>
                 
-                {/* Day Toggle Button */}
                 <button
                   onClick={() => handleDayToggle(day.key)}
                   className={`w-10 h-10 rounded-lg border-2 transition-all duration-200 ${
@@ -139,7 +127,6 @@ const HabitCard = ({ habit, darkMode }) => {
           })}
         </div>
 
-        {/* Progress Bar */}
         <div className="mt-4">
           <div className="flex justify-between items-center mb-1">
             <span className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>

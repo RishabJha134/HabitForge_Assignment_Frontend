@@ -6,17 +6,15 @@ const AddHabitForm = ({ onSuccess, darkMode }) => {
   const [formData, setFormData] = useState({
     name: '',
     category: '',
-    color: '#3B82F6' // Default blue color
+    color: '#3B82F6'
   });
   const [error, setError] = useState('');
 
-  // Predefined categories
   const categories = [
     'Fitness', 'Health', 'Study', 'Work', 'Personal', 
     'Mindfulness', 'Social', 'Hobby', 'Finance', 'Other'
   ];
 
-  // Predefined colors
   const colors = [
     { name: 'Blue', value: '#3B82F6' },
     { name: 'Green', value: '#10B981' },
@@ -30,12 +28,10 @@ const AddHabitForm = ({ onSuccess, darkMode }) => {
     { name: 'Emerald', value: '#059669' }
   ];
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
 
-    // Validation
     if (!formData.name || !formData.name.trim()) {
       setError('Please enter a habit name');
       return;
@@ -57,21 +53,18 @@ const AddHabitForm = ({ onSuccess, darkMode }) => {
     }
 
     try {
-      // Add the habit
       addHabit({
         name: formData.name.trim(),
         category: formData.category,
         color: formData.color
       });
 
-      // Reset form
       setFormData({
         name: '',
         category: '',
         color: '#3B82F6'
       });
 
-      // Call success callback
       if (onSuccess) {
         onSuccess();
       }
@@ -81,7 +74,6 @@ const AddHabitForm = ({ onSuccess, darkMode }) => {
     }
   };
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -103,7 +95,6 @@ const AddHabitForm = ({ onSuccess, darkMode }) => {
       <h3 className="text-lg font-semibold mb-4">Add New Habit</h3>
       
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Habit Name */}
         <div>
           <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
             Habit Name *
@@ -119,7 +110,6 @@ const AddHabitForm = ({ onSuccess, darkMode }) => {
           />
         </div>
 
-        {/* Category */}
         <div>
           <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
             Category *
@@ -139,7 +129,6 @@ const AddHabitForm = ({ onSuccess, darkMode }) => {
           </select>
         </div>
 
-        {/* Color Selection */}
         <div>
           <label className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-2`}>
             Color Badge
@@ -161,7 +150,6 @@ const AddHabitForm = ({ onSuccess, darkMode }) => {
             ))}
           </div>
           
-          {/* Custom Color Input */}
           <div className="mt-2">
             <input
               type="color"
@@ -174,14 +162,12 @@ const AddHabitForm = ({ onSuccess, darkMode }) => {
           </div>
         </div>
 
-        {/* Error Message */}
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
             {error}
           </div>
         )}
 
-        {/* Buttons */}
         <div className="flex space-x-3 pt-2">
           <button
             type="submit"

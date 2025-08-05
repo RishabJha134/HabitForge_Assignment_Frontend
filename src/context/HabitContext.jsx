@@ -1,10 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 
-// Create the Habit Context
 const HabitContext = createContext();
 
-// Custom hook to use the Habit Context
 export const useHabits = () => {
   const context = useContext(HabitContext);
   if (!context) {
@@ -13,12 +11,10 @@ export const useHabits = () => {
   return context;
 };
 
-// Habit Provider Component
 export const HabitProvider = ({ children }) => {
   const { currentUser } = useAuth();
   const [habits, setHabits] = useState([]);
 
-  // Load user's habits when user changes
   useEffect(() => {
     if (currentUser) {
       loadUserHabits(currentUser.id);
@@ -27,7 +23,6 @@ export const HabitProvider = ({ children }) => {
     }
   }, [currentUser]);
 
-  // Load habits for a specific user
   const loadUserHabits = (userId) => {
     try {
       if (!userId) {
@@ -38,7 +33,6 @@ export const HabitProvider = ({ children }) => {
       const allHabits = JSON.parse(localStorage.getItem('habitForgeHabits') || '{}');
       const userHabits = allHabits[userId] || [];
       
-      // Validate habit data structure
       const validHabits = userHabits.filter(habit => {
         return habit && 
                habit.id && 
@@ -54,7 +48,6 @@ export const HabitProvider = ({ children }) => {
     }
   };
 
-  // Save habits to localStorage
   const saveHabitsToStorage = (userHabits) => {
     try {
       const allHabits = JSON.parse(localStorage.getItem('habitForgeHabits')) || {};
@@ -65,14 +58,12 @@ export const HabitProvider = ({ children }) => {
     }
   };
 
-  // Add a new habit
   const addHabit = (habitData) => {
     if (!currentUser) {
       console.error('No user logged in');
       return;
     }
 
-    // Validate habit data
     if (!habitData.name || !habitData.name.trim()) {
       console.error('Habit name is required');
       return;
@@ -104,7 +95,6 @@ export const HabitProvider = ({ children }) => {
     }
   };
 
-  // Toggle a day for a habit
   const toggleHabitDay = (habitId, day) => {
     if (!currentUser || !habitId || !day) {
       console.error('Invalid parameters for toggle habit day');
@@ -114,7 +104,6 @@ export const HabitProvider = ({ children }) => {
     try {
       const updatedHabits = habits.map(habit => {
         if (habit.id === habitId) {
-          // Ensure completedDays exists and is an object
           const completedDays = habit.completedDays || {
             monday: false, tuesday: false, wednesday: false, thursday: false,
             friday: false, saturday: false, sunday: false
@@ -138,7 +127,6 @@ export const HabitProvider = ({ children }) => {
     }
   };
 
-  // Delete a habit
   const deleteHabit = (habitId) => {
     if (!currentUser) return;
 
@@ -147,7 +135,6 @@ export const HabitProvider = ({ children }) => {
     saveHabitsToStorage(updatedHabits);
   };
 
-  // Clear all habits for current user
   const clearAllHabits = () => {
     if (!currentUser) return;
 
@@ -155,7 +142,6 @@ export const HabitProvider = ({ children }) => {
     saveHabitsToStorage([]);
   };
 
-  // Calculate streak for a habit
   const calculateStreak = (habit) => {
     try {
       if (!habit || !habit.completedDays || typeof habit.completedDays !== 'object') {
@@ -165,7 +151,6 @@ export const HabitProvider = ({ children }) => {
       const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
       let streak = 0;
       
-      // Count consecutive completed days from the start of the week
       for (const day of days) {
         if (habit.completedDays[day] === true) {
           streak++;
@@ -181,7 +166,6 @@ export const HabitProvider = ({ children }) => {
     }
   };
 
-  // Context value
   const value = {
     habits,
     addHabit,
