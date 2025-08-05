@@ -3,7 +3,7 @@
 A beautiful, responsive habit tracker application built with React that supports multiple users and helps you build better habits, one day at a time.
 
 ## 📱 Live Demo
-[View Live Demo](https://habit-forge-assignment-frontend.vercel.app/) *(Deploy to get the actual link)*
+[View Live Demo](https://habit-forge-assignment-frontend.vercel.app/)
 
 ## ✨ Features
 
